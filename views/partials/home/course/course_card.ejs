@@ -1,0 +1,41 @@
+<% if (pageCourses.length <= 16) { %>
+  <% for (var i = 0; i < pageCourses.length; i += 4) { %>
+    <div class="container-fluid CourseCardContainer">
+      <div class="row">
+        <% for (var j = i; j < i + 4 && j < pageCourses.length; j++) { %>
+          <div class="col-md-3">
+            <div class="CourseCard">
+              <div class="row CourseCardRow1">
+                <img class="course-IMG" src="<%= pageCourses[j].image %>" />
+              </div>
+              <div class="row CourseCardRow2">
+                <h2 class="course-h2">
+                  <%= pageCourses[j].title %>
+                </h2>
+                <p class="course-p"><%= pageCourses[j].description %></p>
+                <a href="/outline?courseId=<%= pageCourses[j].id %>" class="courseDetails">See Details</a>
+              </div>
+            </div>
+          </div>
+        <% } %>
+      </div>
+    </div>
+  <% } %>
+  <% } else if (pageCourses.length < 8) { %>
+    <div class="container-fluid CourseCardContainer">
+      <% for (var i = 0; i < 5 && i < pageCourses.length; i++) { %>
+        <div class="CourseCard">
+          <div class="row CourseCardRow1">
+            <img class="course-IMG" src="<%= pageCourses[i].image %>" />
+          </div>
+          <div class="row CourseCardRow2">
+            <h2 class="course-h2">
+              <%= pageCourses[i].title %>
+            </h2>
+            <p class="course-p"><%= pageCourses[i].description %></p>
+            <a href="/outline?courseId=<%= pageCourses[i].id %>" class="courseDetails">See Details</a>
+          </div>
+        </div>
+      <% } %>
+    </div>
+  <% } %>

@@ -1,0 +1,60 @@
+<div class="modal fade" id="editModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="staticBackdropLabel">Edit learner account</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form>
+                <div class="row mb-3">
+                  <div class="col">
+                    <label for="first-name" class="col-form-label">First name:</label>
+                    <span id="first-name-label">
+                      <span id="first-name-label1">
+                      </span>
+                      <i id="pencil-first-name"  class="fa-solid fa-user-pen fa-2xs" onclick="editField('first-name')"></i>
+                    </span>
+                    <input type="text" class="form-control d-none" id="first-name">
+                    <div id="first-name-error" class="error-message" style="display: none;"></div>
+                    <button type="button" class="btn btn-primary d-none" id="save-first-name">Save</button>
+                    <button type="button" class="btn btn-secondary d-none" id="cancel-first-name">Cancel</button>
+                  </div>
+                  <div class="col">
+                    <label for="last-name" class="col-form-label">Last name:</label>
+                    <span id="last-name-label">
+                     
+                      <span id="last-name-label1">
+                      </span>
+                      <i id="pencil-last-name" class="fa-solid fa-user-pen fa-2xs" onclick="editField('last-name')"></i>
+                    </span>
+                    <input type="text" class="form-control d-none" id="last-name">
+                    <div id="last-name-error" class="error-message" style="display: none;"></div>
+                    <button type="button" class="btn btn-primary d-none" id="save-last-name">Save</button>
+                    <button type="button" class="btn btn-secondary d-none" id="cancel-last-name">Cancel</button>
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <label for="email" class="col-form-label">Email:</label>
+                  <span id="email-label">
+                    <span id="email-label1">
+                      </span>
+                    <i id="pencil-email"  class="fa-solid fa-user-pen fa-2xs" onclick="editField('email')"></i>
+                  </span>
+                  <input type="email" class="form-control d-none" id="email">
+                  <div id="email-error" class="error-message" style="display: none;"></div>
+                  <button type="button" class="btn btn-primary d-none" id="save-email">Save</button>
+                  <button type="button" class="btn btn-secondary d-none" id="cancel-email">Cancel</button>
+           </div>
+              </form>
+              
+              
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick=clearInputs()>Cancel</button>
+          <button type="button" class="btn btn-primary" id="save-update" onclick="updateProfile()">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  

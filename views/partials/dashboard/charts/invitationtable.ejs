@@ -1,0 +1,66 @@
+<div class="col-md-6 col-xxl-4 d-flex order-2 order-xxl-4"></div>
+<div class="card flex-fill w-100">
+  <div class="px-4 pt-3">
+    <h5 class="card-title mb-0">All Invitation</h5>
+  </div>
+  <div class="px-4 pb-4 d-flex">
+    <div class="align-self-center w-100">
+      <div class="py-3">
+        <div class="chart chart-xs">
+          <div id="invitation-table"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+const invitationtable = document.getElementById('invitation-table');
+const learnersid = <%-JSON.stringify(application.learnerid)%>; // array 
+
+const tableData = learnersid.map((learnerid) => ({
+  'EnrollRequest': learnerid,
+}));
+
+let grid;
+
+(async () => {
+  grid = new gridjs.Grid({
+    sort: true,
+    resizable: true,
+    search: true,
+    fixedHeader: true,
+    pagination: {
+      limit: 10
+    },
+    columns: [
+      { name: 'EnrollRequest', width: '180px' },
+      {
+        name: 'Reject',
+        formatter: (_, row) =>
+          gridjs.html(
+            `<button type="button" id="reject-button-${row.index}" class="edit-button-datatable edit-button-modal-opener text-nowrap" onclick="handleReject(${row.index})">Rejected</button>`
+          )
+      },
+      {
+        name: 'Acceptance',
+        formatter: (_, row) =>
+          gridjs.html(
+            `<button type="button" id="accept-button-${row.index}" class="edit-button-datatable edit-button-modal-opener text-nowrap" onclick="handleReject(${row.index})">Accepted</button>`
+          )
+      },
+    ],
+    data: tableData
+  });
+  grid.render(invitationtable);
+})();
+
+function handleReject(rowIndex) 
+{
+  const rejectButton = document.getElementById(`reject-button-${rowIndex}`);
+  const acceptButton = document.getElementById(`accept-button-${rowIndex}`);
+  rejectButton.style.display = 'none';
+  acceptButton.style.display = 'none';
+}
+
+  </script>
+  

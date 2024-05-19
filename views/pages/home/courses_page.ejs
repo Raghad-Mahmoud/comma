@@ -1,0 +1,36 @@
+<%- include('../../partials/home/header'); %>
+<%- include('../../partials/home/nav'); %>
+
+<div class="courses-container">
+
+  <div>
+    <div class="blackLayer">
+      <img src="/images/coursesPageIMG.jpg" alt="My Image" class="myIMG">
+  </div>
+        <h5 class="topIMG"> Learn New Skills Online With COMMA !!</h5>
+  </div>
+
+  <div class="courses-page-sorting">
+    <%- include('../../partials/home/course/sorting'); %>
+  </div>
+
+  <div class="coursesPageTEXT">
+    <h2> The world's Largest selection of courses</h2>
+    <p>choose from 150,000 online courses with new additions published every month</p>
+  </div>
+
+  <div class="course-4cards-row">
+    <%- include('../../partials/home/course/course_card', { pageCourses: pageCourses}); %>
+  </div>
+
+  <div class=" courses-page-pagination">
+    <%- include('../../partials/home/course/pagination', { size: size},{searchQuery:searchQuery},{currentPage:currentPage}); %>
+  </div>
+</div>
+
+
+
+    
+
+
+<%- include('../../partials/home/footer'); %>

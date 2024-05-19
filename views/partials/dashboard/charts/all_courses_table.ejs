@@ -1,0 +1,277 @@
+<!--Form Modal-->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-bodyF">
+        <!--form-->
+        <div class="main-blockF">
+          <div class="left-partF">
+            <i class="fasF fa-envelopeF"></i>
+            <i class="fasF fa-atF"></i>
+            <i class="fasF fa-mail-bulkF"></i>
+          </div>
+          <form action="/dashboard/courses" method="POST">
+            <h1 class="formHF">Add course</h1>
+            <div class="info">
+              <input class="modalFormInputF" type="text" name="title" placeholder="Course Title">
+              <input type="text" class="modalFormInputF" name="description" placeholder="Description">
+            </div>
+            <p class="formPF">Outline</p>
+            <div>
+              <textarea rows="4" class="modalFormInputF"></textarea>
+            </div>
+            <input type="submit" value="Add Course" class="modalFormBTNF">
+            <!-- <button type="submit"  class="btn btn-primary">add</button> -->
+          </form>
+        </div>
+        <!--form end-->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--Form Modal End-->
+
+<!-- Warning Modal -->
+<div class="modal fade" id="warningModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">Warning</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Are you sure you want to DELETE this course?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button type="submit" class="btn btn-danger" id="deleteCourseBTN">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Warning Modal end -->
+
+<!-- Warning Modal -->
+<div class="modal fade" id="warningModalUpdate" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel"> Are you sure you want to Update this course?</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <!--form-->
+        <div class="main-blockF">
+          <div class="left-partF">
+            <i class="fasF fa-envelopeF"></i>
+            <i class="fasF fa-atF"></i>
+            <i class="fasF fa-mail-bulkF"></i>
+          </div>
+          <form action="/dashboard/courses" method="POST">
+            <h1 class="formHF">Updating course</h1>
+            <div class="info">
+              <input class="modalFormInputF" type="text" name="title" placeholder="Course Title">
+              <input type="text" class="modalFormInputF" name="description" placeholder="Description">
+            </div>
+            <p class="formPF">Outline</p>
+            <div>
+              <textarea rows="4" class="modalFormInputF"></textarea>
+            </div>
+          </form>
+        </div>
+        <!--form end-->
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button type="submit" class="btn btn-danger" id="updateCourseBTN">Update</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Warning Modal end -->
+
+
+
+<div class="col-md-6 col-xxl-4 d-flex order-2 order-xxl-4"></div>
+<div class="card flex-fill w-100">
+  <div class="px-4 pt-3">
+    <h5 class="card-title mb-0">All Courses</h5>
+  </div>
+  <div class="px-4 pb-4 d-flex">
+    <div class="align-self-center w-100">
+      <div class="py-3">
+        <div class="chart chart-xs">
+          <button type="button" id="add-course" class="btn btn-primary mb-4 mt-4 me-5" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+            Add Course
+          </button>
+          <div id="courses-table"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  const {
+    h
+  } = gridjs;
+  const coursesTableElement = document.getElementById('courses-table')
+  // let tableCoursesData = JSON.parse(coursesTableElement.dataset.courses)
+  let tableCoursesData = <%- data.courses %>;
+  tableCoursesData = tableCoursesData.map((course) => {
+    return {
+      ...course,
+      percentage: course.percentage + ' %'
+    }
+  });
+  (async () => {
+    new gridjs.Grid({
+      sort: true,
+      resizable: true,
+      search: true,
+      fixedHeader: true,
+      pagination: {
+        limit: 10
+      },
+      columns: [{
+          name: 'Title',
+          width: '180px'
+        },
+        {
+          name: 'enrolled',
+          width: '130px'
+        },
+        {
+          name: 'rating',
+          width: '130px'
+        },
+        {
+          name: 'stars',
+          width: '130px'
+        },
+        {
+          name: 'totalHours',
+          width: '130px'
+        },
+        {
+          name: 'Actions',
+          sort: false,
+          search: false,
+          resizable: true,
+          formatter: (cell, row) => {
+            const editBtn = h('button', {
+              style: 'padding: 0.5rem 1rem; margin-bottom: 0.5rem; border: none; border-radius: 0.25rem; background-color: #1E40AF; color: white; font-size: 1rem; font-weight: 500;',
+              onClick: function updateCourse() {
+
+                const modalElement = document.getElementById('warningModalUpdate');
+                const updateModalBtn = document.getElementById('updateCourseBTN');
+
+                const modalInstance = new bootstrap.Modal(modalElement);
+                modalInstance.show();
+
+
+                const modalForm = document.querySelector('#warningModalUpdate form');
+
+                const titleInput = modalForm.querySelector('input[name="title"]');
+                const descriptionInput = modalForm.querySelector('input[name="description"]');
+                const outlineTextarea = modalForm.querySelector('textarea');
+                const courseTitle = row.cells[0].data;
+
+                // Fetch course details from the server based on the title
+                fetch(`/course-details?title=${encodeURIComponent(courseTitle)}`)
+                  .then(response => response.json())
+                  .then(data => {
+                    // Populate the form inputs with the retrieved course details
+                    titleInput.value = courseTitle;
+                    descriptionInput.value = data.description;
+                    outlineTextarea.value = data.outline;
+
+                  })
+                  .catch(error => {
+                    console.error('Failed to fetch course details:', error);
+                  });
+
+
+
+                updateModalBtn.onclick = function() {
+
+                  const updatedCourse = {
+                    title: titleInput.value,
+                    description: descriptionInput.value,
+                    outline: outlineTextarea.value
+                  };
+
+                  // Send the updated course data to the server for update
+                  fetch(`/dashboard/courses/${encodeURIComponent(courseTitle)}`, {
+                      method: 'PUT',
+                      headers: {
+                        'Content-Type': 'application/json'
+                      },
+                      body: JSON.stringify(updatedCourse)
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                      modalInstance.hide();
+                      window.location.href = '/dashboard/courses';
+                    })
+                    .catch(error => {
+                      console.error('Failed to update course:', error);
+                    });
+
+                };
+
+              }
+            }, h('i', {
+              className: 'fas fa-edit mr-2'
+            }));
+
+            const deleteBtn = h('button', {
+              style: 'padding: 0.5rem 1rem; margin-bottom: 1rem; border: none; border-radius: 0.25rem; color: #fff; background-color: #f44336;color: white; font-size: 1rem; font-weight: 500;margin-left: 10px;',
+              id: 'warning-delete-button',
+
+              onClick: function softDeleteCourse() {
+
+                const modalElement = document.getElementById('warningModal');
+                const deleteModalBtn = document.getElementById('deleteCourseBTN');
+                const modalInstance = new bootstrap.Modal(modalElement);
+                modalInstance.show();
+                deleteModalBtn.onclick = function() {
+                  const courseId = row.cells[0].data
+                  const encodedCourseId = encodeURIComponent(courseId);
+                  const url = `/courses/delete/${encodedCourseId}`
+                  fetch(url, {
+                      method: 'GET',
+                    })
+                    .then(res => {
+                      if (res.ok) {
+                        modalInstance.hide();
+                        window.location.href = '/dashboard/courses';
+                      } else {
+                        console.error('Failed to delete courses');
+                      }
+                    }).catch(error => {
+                      console.error('Failed to delete courses:', error);
+                    });
+                  modalInstance.show();
+                }
+              }
+            }, h('i', {
+              class: 'fas fa-trash mr-2'
+            }));
+
+            return h('div', {}, editBtn, deleteBtn);
+          }
+        },
+      ],
+
+      data: tableCoursesData
+    }).render(coursesTableElement)
+  })()
+</script>

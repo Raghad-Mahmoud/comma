@@ -1,0 +1,205 @@
+<form action="outline" method="POST">
+  <div class="container mt-5">
+    <div class="modal" id="myModal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header text-black" id="headerColor1">
+            <h5 class="modal-title"><b>Alert !</b></h5>
+            <button onclick="unhide()" class="btn-close" type="button" data-bs-dismiss="modal"></button>
+          </div>
+          <div class="modal-body" id="defaulPreferenceBox">
+            <div class="content-box-one">
+              <label for="message" class="form-label">
+                <b>List Default Preferences Which Is:-</b><br><br>
+                <b>Type: Video</b><br>
+                <b>Length: Average</b><br>
+                <b>Assessments: After Each Topic</b><br>
+                <b>Collaborative: No</b><br>
+                <b>Apply For All Courses: Yes</b><br>
+              </label>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button name="actionFlag1" class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#secondModal" data-bs-dismiss="modal" formaction="/outline"><b>Edit</b></button>
+            <button name="actionFlag2" id="applybutton" onclick="ApplyModal('<%= singleCourse.id %>')" class="btn btn-primary" data-bs-dismiss="modal" value="actionApply"><b>Apply</b></button>
+</form>
+</div>
+</div>
+</div>
+</div>
+<form method="POST" action="outline" onsubmit="event.preventDefault();
+        Swal.fire({
+          title: '<b>Are you sure you want to submit this form?</b>',
+          html: '<b>Type :</b>  ' + (function() {
+            var radios = document.getElementsByName('content');
+            var selectedValue;
+            for (var i = 0; i < radios.length; i++) {
+              if (radios[i].checked) {
+                selectedValue = radios[i].value;
+                break;
+              }
+            }
+      
+            var radios1 = document.getElementsByName('length');
+            var selectedValue1;
+            for (var i = 0; i < radios1.length; i++) {
+              if (radios1[i].checked) {
+                selectedValue1 = radios1[i].value;
+                break;
+              }
+            }
+      
+            var radios2 = document.getElementsByName('assessments');
+            var selectedValue2;
+            for (var i = 0; i < radios2.length; i++) {
+              if (radios2[i].checked) {
+                selectedValue2 = radios2[i].value;
+                break;
+              }
+            }
+      
+            var collaborative1 = document.getElementsByName('collaborative')[0].checked ? 'Yes' : 'No';
+      
+            var applyForAllCourses1 = document.getElementsByName('applyForAllCourses')[0].checked ? 'Yes' : 'No';
+            return '<b>' + selectedValue + '</b><br> <b>Length :</b> ' + '<b>' + selectedValue1 + '</b>' + '<br> <b>Assessments :</b> ' + '<b>' + selectedValue2 + '</b>' + '<br> <b>Collaborative :</b> ' + '<b>' + collaborative1 + '</b>' + '<br> <b>Apply For All Courses :</b> ' + '<b>' + applyForAllCourses1 + '</b>';
+      
+          })(),
+
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Yes, submit it!'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            this.submit();
+          }
+        });">
+
+  <div class="modal" id="secondModal">
+    <div class="modal-dialog">
+      <div class="modal-content" id="secondModalDiv">
+        <div class="modal-header alert alert-success" id="headerColor2">
+          <h5 class="modal-title">Second Modal</h5>
+          <button class="btn btn-primary" onclick="refresh()" type="button" data-bs-dismiss="modal"><b>Exit</b></button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="column">
+              <div class="content-box-one">
+                <h2>Type</h2>
+                <label>
+                  <div class="content-box-type">
+                    <input type="radio" name="content" id="content-1" value="video">
+                    <b>Video</b>
+                </label>
+              </div>
+              <label>
+                <div class="content-box-type" id="content-box-2">
+                  <input type="radio" name="content" id="content-2" value="article">
+                  <b>Article</b>
+              </label>
+            </div>
+            <label>
+              <div class="content-box-type" id="content-box-3">
+                <input type="radio" name="content" id="content-3" value="task">
+                <b>Task</b>
+            </label>
+          </div>
+        </div>
+        <div class="form-check form-switch">
+          <input name="collaborative" value="collaborative" class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+          <label class="form-check-label" for="flexSwitchCheckDefault"><b>Collaborative</b></label>
+        </div>
+        <div class="form-check form-switch">
+          <input name="applyForAllCourses" value="apply for all courses" class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked>
+          <label class="form-check-label" for="flexSwitchCheckChecked"> <b>Apply for all courses</b></label>
+        </div>
+      </div>
+      <div class="column">
+        <div class="content-box-one">
+          <h2>Length</h2>
+          <label>
+            <div class="content-box-length">
+              <input type="radio" name="length" id="length-1" value="short">
+              <b>Short</b>
+          </label>
+        </div>
+        <label>
+          <div class="content-box-length">
+            <input type="radio" name="length" id="length-2" value="average">
+            <b>Average</b>
+        </label>
+      </div>
+      <label>
+        <div class="content-box-length">
+          <input type="radio" name="length" id="length-3" value="long">
+          <b>Long</b>
+      </label>
+    </div>
+  </div>
+  </div>
+  <div class="column">
+    <div class="content-box-one">
+      <h2>Assessments</h2>
+      <label>
+        <div class="content-box-assesments">
+          <input type="radio" name="assessments" id="assessments-1" value="after each video">
+          <b>After each video</b>
+      </label>
+    </div>
+    <label>
+      <div class="content-box-assesments">
+        <input type="radio" name="assessments" id="assessments-2" value="after each chapter">
+        <b>After each chapter</b>
+    </label>
+  </div>
+  <label>
+    <div class="content-box-assesments">
+      <input type="radio" name="assessments" id="assessments-3" value="at the end of the course">
+      <b>At the end of the course</b>
+  </label>
+  </div>
+  </div>
+  </div>
+
+  <button id="done-button" class="btn btn-primary"><b>Save</b></button>
+</form>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<script src="js/preferences.js"></script>
+<script>
+  const courseId = mongoose.Types.ObjectId.isValid(singleCourse.id) ?
+    singleCourse.id // Use the existing `id` if it's already a valid ObjectId
+    :
+    String(singleCourse.id);
+  const applyButton = document.getElementById('applybutton');
+  applyButton.addEventListener('click', function() {
+    ApplyModal(courseId);
+  });
+
+  function ApplyModal(courseId) {
+    const modal = new bootstrap.Modal(document.getElementById('myModal'));
+    const url = `/outline/apply/${courseId}`;
+    fetch(url, {
+        method: 'GET',
+      })
+      .then(res => {
+        if (res.ok) {
+          modal.hide();
+          window.location.href = `/outline?courseId=${courseId}`;
+        } else {
+          console.error('Failed to apply course');
+        }
+      })
+      .catch(error => {
+        console.error('Failed to apply course:', error);
+      });
+    modal.show();
+  }
+</script>

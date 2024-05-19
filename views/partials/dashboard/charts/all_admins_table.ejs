@@ -1,0 +1,95 @@
+<div class="col-12">
+  <div class="card flex-fill w-100">
+    <div class="px-4 pt-3">
+      <h5 class="card-title mb-0">All Admins</h5>
+    </div>
+    <div class="px-4 d-flex">
+      <div class="align-self-center w-100">
+        <div class="py-3">
+          <div class="chart chart-xs">
+            <div id="admins-table"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const allAdminsElm = document.getElementById('admins-table');
+  const adminsLimit = 5;
+  (async () => {
+    new gridjs.Grid({
+      sort: {
+        server: {
+          url: (prev, columns) => {
+            if (!columns.length) return prev;
+            const dir = columns[0].direction === 1 ? 'asc' : 'desc';
+            return `${prev}?sort=${dir}&limit=${adminsLimit}&`;
+          }
+        }
+      },
+      resizable: true,
+      search: {
+        server: {
+          url: (prev, keyword) => `${prev}?search=${keyword}&limit=${adminsLimit}`
+        }
+      },
+      fixedHeader: true,
+      columns: [{
+          name: 'ID',
+          hidden: true,
+        },
+        {
+          name: 'IMG',
+          hidden: true,
+        },
+        {
+          name: 'Name',
+          width: '100px',
+          id: 'name',
+          formatter: (cell, row) => {
+            return gridjs.html(`
+              <img src="${row.cells[1].data}" class="rounded-circle" width="30" 
+              height="30"> <span class="ml-4"> ${cell}</span>
+            `)
+          }
+        },
+        {
+          name: 'Email',
+          width: '130px',
+          id: 'email'
+        },
+        {
+          name: 'Actions',
+          width: '70px',
+          id: 'id',
+          formatter: (cell, row) => {
+            const editBtn = `<button type="button" class="edit-button-datatable 
+            edit-button-modal-opener text-nowrap" data-bs-target="#admin-accounts-edit-modal"
+            data-bs-toggle="modal" data-email="${row.cells[3].data}">Edit</button>`
+            return gridjs.html(`${editBtn}`)
+          }
+        },
+      ],
+      pagination: {
+        limit: adminsLimit,
+        server: {
+          url: (prev, page, limit) => `${prev}?limit=${limit}&offset=${page * limit}`
+        }
+      },
+      server: {
+        url: '/api/admins',
+        then: admins => admins.results.map((admin) => {
+          return {
+            id: admin._id,
+            img: admin.img || '/img/avatars/avatar.jpg',
+            name: admin.firstname + ' ' + admin.lastname,
+            email: admin.email,
+          }
+        }),
+        total: data => data.count
+      }
+    }).render(allAdminsElm)
+  })()
+</script>

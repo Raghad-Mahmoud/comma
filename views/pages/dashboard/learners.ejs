@@ -1,0 +1,24 @@
+<%- include('../../partials/dashboard/header'); %>
+<div class="wrapper">
+	<%- include('../../partials/dashboard/sidebar'); %>
+		<div class="main">
+			<%- include('../../partials/dashboard/navbar'); %>
+			<div class="d-flex justify-content-end">
+				<a href="learners/new_learner">
+				  <button type="button" class="btn btn-primary mb-4 mt-4 me-5">Add New Learner</button>
+				</a>
+			</div>			  
+			<main class="content">
+				<div class="row">
+					<%- include('../../partials/dashboard/charts/all_learners_table.ejs'); %>
+				</div>
+
+			</main>
+		<%- include('../../partials/dashboard/footer'); %>
+	</div>
+</div>
+
+	<script src="/js/app.js"></script>
+
+</body>
+</html>

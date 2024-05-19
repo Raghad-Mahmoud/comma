@@ -1,0 +1,41 @@
+<form action="/courses" method="POST">
+  <div class="container FilterContainer">
+    <div class="row FilerRow">
+
+   
+      <select class="selectFilter"  name="searchQuery" >
+        <option value="" >rating</option>
+        <option value="Asc" name="sortOrder">Asc</option>
+        <option value="Desc" name="sortOrder">Desc</option>
+      </select>
+     
+      <select class="selectFilter"  name="searchQuery">
+        <option value="">enrollment</option>
+        <option value="Asc" name="sortOrder">Asc</option>
+        <option value="Desc" name="sortOrder">Desc</option>
+      </select>
+
+
+      <select class="selectFilter"  name="searchQuery">
+        <option value="">Topic</option>
+        <option value=" Programming Languages" name="sortOrder">Programming Languages</option>
+        <option value=" Web Development" name="sortOrder">Web Development</option>
+        <option value="Mobile Development" name="sortOrder">Mobile Development</option>
+        <option value="Database Design & Development" name="sortOrder">Database Design & Development</option>
+        <option value="Data Science" name="sortOrder">Data Science</option>
+        <option value="Software Testing" name="sortOrder">Software Testing</option>
+        <option value="Game Developmentt" name="sortOrder">Game Development</option>
+
+
+      </select>
+
+
+    
+      <div class="selectFilter">
+        <input type="text" class="form-control" id="search-input" aria-label="Text input with dropdown button" placeholder="Search by Tag" name="searchQuery">
+      </div>
+
+      <input type="submit"  value="submit"  class="form-control submitSort">
+    </div>
+  </div>
+</form>

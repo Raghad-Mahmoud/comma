@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- <title><%= title %></title> -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<div>
+    <% if (error) { %>
+        <div class="alert alert-danger" role="alert" id="add-learner-error">
+          <%= error %>
+        </div>
+    <% } %>
+</div>
+<form action="/dashboard/learners/new_learner" method="POST">
+    <div class="mb-3 ">
+        <label for="firstname">First name</label>
+        <input type="text" class="form-control" name= "firstname" id = "firstname">
+      </div>
+      <div class="mb-3 ">
+        <label for="lastname">Last name</label>
+        <input type="text" class="form-control" name="lastname" id="lastname" >
+      </div>
+    <div class="mb-3 ">
+      <label for="email">Email address</label>
+      <input type="email" class="form-control" name="email" id="email" value=" ">
+    </div>
+    <div class="mb-3">
+      <label for="password">Password</label>
+      <input type="password" class="form-control" name="password" id="password"
+    </div>
+    <div class="mb-3">
+        <label for="confirmPassword">Confirm Password</label>
+        <input type="password" class="form-control " id="confirmPassword" name="confirmPassword"  />
+      </div>
+    <button type="submit" class="btn btn-primary mb-5">Add Learner</button>
+</form>
+<script>
+    window.onload = function() {
+    setTimeout(function() {
+      const err = document.getElementById('add-learner-error');
+      err.remove();
+      const inputs = document.querySelectorAll('input');
+      inputs.forEach(input => {
+        input.value = '';
+      });
+    }, 3000);
+  };
+
+</script>

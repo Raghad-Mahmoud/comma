@@ -1,0 +1,450 @@
+<div class="modal fade" id="deleteModal" tabindex="-1" data-bs-backdrop="static" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5">Delete</h1>
+        <button type="button" class="btn-close deleteAccountExitBtn" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Are you sure you want to delete this account ?!
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary deleteAccountExitBtn" data-bs-dismiss="modal" data-bs-target="#deleteModal">Exit</button>
+        <button type="button" class="btn btn-danger" id="account-delete-button" data-bs-toggle="modal" data-bs-target="#deleteModal">Yes</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="admin-accounts-edit-modal" tabindex="-1" data-bs-backdrop="static" aria-labelledby="AdminCccountsEditModal" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content bg-white">
+      <div class="modal-header bg-white">
+        <h1 class="modal-title fs-5" id="admin-accounts-edit-modal-label">Edit Admin Account</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <ul class="nav nav-tabs bg-white" id="admineditmodaltab" role="tablist">
+          <li class="nav-item" role="presentation">
+            <button class="nav-link active bg-white" id="basic-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Basic</button>
+          </li>
+        </ul>
+        <div class="tab-content bg-white" id="myTabContent">
+          <form id="admin-accounts-edit-form" method="POST" action="update-admins-data" class="needs-validation" novalidate>
+            <div class="mb-3">
+              <label for="adminAccountsEditModalFirstName" class="form-label" id="firstname-validator">First Name</label>
+              <div class="input-group mb-3 has">
+                <div class="input-group-text rounded-5">
+                  <div class="edit-checkbox-disable">
+                    <label class="edit-checkbox-disable-switch">
+                      <input type="checkbox" class="admin-edit-input-disable form-check-input mt-0" value="">
+                      <span class="edit-checkbox-slider"></span>
+                    </label>
+                  </div>
+                </div>
+                <input id="adminAccountsEditModalFirstName" type="text" class="form-control admin-edit-input-disable-input firstname-validator rounded-5" disabled name="firstname" required>
+                <div class="invalid-feedback">
+                  Firstname Must be 2 charcters or longer ,can't have numbers or spaces
+                </div>
+                <div class="valid-feedback"></div>
+              </div>
+              <div id="adminAccountsEditModalFirstNameLabel" class="form-text">Click to Edit First Name</div>
+            </div>
+            <div class="mb-3">
+              <label for="adminAccountsEditModalLastName" class="form-label" id="lastname-validator">Last Name</label>
+              <div class="input-group mb-3">
+                <div class="input-group-text rounded-5">
+                  <div class="edit-checkbox-disable">
+                    <label class="edit-checkbox-disable-switch">
+                      <input type="checkbox" class="admin-edit-input-disable form-check-input mt-0" value="">
+                      <span class="edit-checkbox-slider"></span>
+                    </label>
+                  </div>
+                </div>
+                <input id="adminAccountsEditModalLastName" type="text" class="form-control admin-edit-input-disable-input lastname-validator rounded-5" disabled name="lastname" required>
+                <div class="invalid-feedback">
+                  Lastname must be 2 charcters or longer ,can't have numbers or spaces
+                </div>
+                <div class="valid-feedback"></div>
+              </div>
+              <div id="adminAccountsEditModalLastNameLabel" class="form-text">Click to Edit Last Name</div>
+            </div>
+            <div class="mb-3">
+              <label for="adminAccountsEditModalEmail" class="form-label" id="email-validator">Email address</label>
+              <div class="input-group mb-3">
+                <div class="input-group-text rounded-5">
+                  <div class="edit-checkbox-disable">
+                    <label class="edit-checkbox-disable-switch">
+                      <input type="checkbox" class="admin-edit-input-disable form-check-input mt-0" value="">
+                      <span class="edit-checkbox-slider"></span>
+                    </label>
+                  </div>
+                </div>
+                <input id="adminAccountsEditModalEmail" type="text" class="form-control admin-edit-input-disable-input email-validator rounded-5" disabled name="email" required>
+                <div class="invalid-feedback">
+                  Email must be valid and no spaces
+                </div>
+                <div class="valid-feedback"></div>
+              </div>
+              <div id="adminAccountsEditModalEmailLabel" class="form-text">Click to Edit Email</div>
+            </div>
+            <div class="mb-3">
+              <label for="adminAccountsEditModalPassword" class="form-label" id="password-validator">Password</label>
+              <div class="input-group mb-3">
+                <div class="input-group-text rounded-5">
+                  <div class="edit-checkbox-disable">
+                    <label class="edit-checkbox-disable-switch">
+                      <input type="checkbox" class="admin-edit-input-disable form-check-input mt-0" value="" onclick="editPasswordToggleVisible()">
+                      <span class="edit-checkbox-slider"></span>
+                    </label>
+                  </div>
+                </div>
+                <input id="adminAccountsEditModalPassword" type="password" class="form-control admin-edit-input-disable-input password-validator rounded-5" name="password" required disabled>
+                <div class="invalid-feedback">
+                  Password must be at least 8 characters long and include at least one digit, one lowercase letter, and one uppercase letter ,no sapces
+                </div>
+                <div class="valid-feedback"></div>
+              </div>
+              <div id="adminAccountsEditModalPasswordLabel" class="form-text">Click to Edit Password</div>
+            </div>
+            <input type="hidden" id="old-email-holder-admins" name="targetEmail">
+          </form>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <!-- Modal -->
+        <button type="button" class="edit-button-datatable red-button-delete text-nowrap me-auto" id="edit-account-delete-button" data-bs-toggle="modal" data-bs-target="#deleteModal">Delete</button>
+        <button type="button" id="edit-account-back-button" class="edit-button-datatable text-nowrap" data-bs-dismiss="modal" data-bs-target="admin-accounts-edit-modal">Back</button>
+        <input type="submit" id="edit-account-save-button" form="admin-accounts-edit-form" value="Save Changes" class="edit-button-datatable text-nowrap" />
+      </div>
+    </div>
+  </div>
+</div>
+<div class="toast-container position-fixed bottom-0 end-0 p-3">
+  <div id="updateSuccessToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-header">
+      <img class="rounded me-2" alt="...">
+      <strong class="me-auto">Updating</strong>
+      <small>1 second ago</small>
+      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+    <div class="toast-body">
+      Account Info Updated Successfully
+    </div>
+  </div>
+</div>
+<style>
+  .admin-edit-input-disable-input:disabled {
+    background-color: #ffffff;
+    color: rgb(0, 0, 0);
+    border-color: #ffffff;
+    border-color: #000000;
+    box-shadow: #11111a1a 0px 1px 0px, #11111a1a 0px 8px 24px, #11111a1a 0px 16px 48px;
+  }
+
+  .admin-edit-input-disable-input {
+    border-color: #5e5df0;
+    border-width: 2px;
+    box-shadow: #00fa0c1a 0px 1px 0px, #00fa0c1a 0px 8px 24px, #00fa0c1a 0px 16px 48px;
+  }
+
+  .admin-edit-input-disable-input:focus {
+    outline: 2px solid #5e5df0;
+    box-shadow: none;
+  }
+
+  #admineditmodaltab>li>button {
+    background-color: #5e5df0 !important;
+    color: white;
+    border-radius: 5px;
+  }
+
+  .input-group-text {
+    background-color: #5d5df000;
+    border: none;
+    padding-left: 0px;
+  }
+
+  .modal-body {
+    padding-left: 0.8rem;
+  }
+</style>
+<style>
+  .edit-checkbox-disable input[type="checkbox"] {
+    visibility: hidden;
+    display: none;
+  }
+
+  .edit-checkbox-disable *,
+  .edit-checkbox-disable ::after,
+  .edit-checkbox-disable ::before {
+    box-sizing: border-box;
+  }
+
+  /* The switch - the box around the edit-checkbox-slider */
+  .edit-checkbox-disable .edit-checkbox-disable-switch {
+    font-size: 1rem;
+    position: relative;
+    display: inline-block;
+    width: 4em;
+    height: 2em;
+  }
+
+  /* The edit-checkbox-slider */
+  .edit-checkbox-disable .edit-checkbox-slider {
+    position: absolute;
+    cursor: pointer;
+    inset: 0;
+    background-color: #eee;
+    transition: 0.4s;
+    border-radius: 0.5em;
+    box-shadow: 0 0.2em #dfd9d9;
+  }
+
+  .edit-checkbox-disable .edit-checkbox-slider:before {
+    position: absolute;
+    content: "";
+    height: 1.5em;
+    width: 1.4em;
+    border-radius: 0.3em;
+    left: 0.3em;
+    bottom: 0.7em;
+    background-color: lightsalmon;
+    transition: 0.4s;
+    box-shadow: 0 0.4em #bcb4b4;
+  }
+
+  .edit-checkbox-disable .edit-checkbox-slider:hover::before {
+    box-shadow: 0 0.2em #bcb4b4;
+    bottom: 0.5em;
+  }
+
+  .edit-checkbox-disable input:checked+.edit-checkbox-slider::before {
+    transform: translateX(2em);
+    background: lightgreen;
+  }
+
+  .red-button-delete {
+    background: #ff0000;
+    box-shadow: #ff0000 0 10px 20px -10px;
+  }
+</style>
+
+<script>
+  // ------------ Checkbox Edit Password -------------------------------------
+  const checkboxes = document.querySelectorAll('.admin-edit-input-disable');
+  checkboxes.forEach(function(checkbox) {
+    checkbox.addEventListener('click', function() {
+      const input = this.parentNode.parentNode.parentNode.parentNode.querySelector('.admin-edit-input-disable-input');
+      input.disabled = !this.checked;
+    });
+  });
+  // ------------ Checkbox Edit Password --------------------------------------
+  // ------------ Password Visibility -----------------------------------------
+  function editPasswordToggleVisible() {
+    var x = document.getElementById("adminAccountsEditModalPassword");
+    if (x.type === "password") {
+      x.type = "text";
+    } else {
+      x.type = "password";
+    }
+  }
+  // ------------ Password Visibility -----------------------------------------
+  // ------------ Send Data to Server -----------------------------------------
+  const editModalAccountsObj = document.getElementById("admin-accounts-edit-modal")
+  const originalModal = editModalAccountsObj.cloneNode(true);
+  var oldEmailData;
+  document.addEventListener('click', (e) => {
+    if (e.target && e.target.classList.contains('edit-button-modal-opener')) {
+      const email = e.target.getAttribute('data-email')
+      const oldEmailElement = document.getElementById("old-email-holder-admins")
+      oldEmailElement.value = email
+      oldEmailData = email
+    }
+  })
+  document.getElementById("account-delete-button").addEventListener('click', deleteAdmin)
+
+  function deleteAdmin() {
+    const bodyData = {
+      email: oldEmailData
+    }
+    const responseData = fetch('/dashboard/delete-admin', {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(bodyData),
+      })
+      .catch(error => console.error(error))
+      .then(data => {
+        location.reload();
+      })
+  }
+
+  const formElement = document.querySelector("#admin-accounts-edit-form")
+  let responseData = {}
+  formElement.addEventListener('submit', async event => {
+    event.preventDefault();
+
+    const formData = new FormData(formElement);
+    const jsonObject = {
+      targetEmail: oldEmailData
+    };
+    Array.from(formData.entries()).forEach(([key, value]) => {
+      jsonObject[key] = value;
+    });
+    responseData = await updateAdminsFetch(jsonObject)
+  })
+  async function updateAdminsFetch(jsonObject) {
+    if (
+      !formElement.checkValidity() ||
+      !validateEmail() ||
+      !validateFirstName() ||
+      !validateLastName() ||
+      !validatePassword()
+    ) {
+      saveButtonObj.style.display = "block";
+      return false
+    } else {
+      saveButtonObj.style.display = "none";
+      formElement.classList.add('was-validated');
+      const data = JSON.stringify(jsonObject);
+      const responseData = await fetch('/dashboard/update-admins-data', {
+          method: "POST",
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: data
+        }).then(res => res.json())
+        .then(data => {
+          if (data.status == 'Fail') {
+            for (let i = 0; i < data.msg.keys.length; i++) {
+              const classNamePick = data.msg.keys[i] + "-validator"
+              const inputHolder = document.getElementsByClassName(classNamePick)[0]
+              inputHolder.classList.remove('is-valid');
+              inputHolder.classList.add('is-invalid');
+              oldReserve.labels.push(inputLabel.innerHTML)
+            }
+          } else if (data.status == 'Success') {
+            const formElement = document.querySelector("#admin-accounts-edit-form")
+            formElement.reset()
+            const updateSuccessToast = document.getElementById('updateSuccessToast')
+            const updateSuccessToastBS = bootstrap.Toast.getOrCreateInstance(updateSuccessToast)
+            updateSuccessToastBS.show()
+            const inputs = document.getElementsByClassName("admin-edit-input-disable-input")
+            Array.from(inputs).forEach(input => {
+              input.classList.remove('is-invalid');
+            })
+            location.reload();
+          }
+        })
+        .catch(error => console.error(error))
+    }
+  }
+
+  // ------------ Send Data to Server -----------------------------------------
+  // ------------ Validation --------------------------------------------------
+  var saveButtonObj = document.getElementById("edit-account-save-button")
+  document.querySelector('.email-validator').addEventListener('blur', validateEmail);
+  document.querySelector('.password-validator').addEventListener('blur', validatePassword);
+  document.querySelector('.firstname-validator').addEventListener('blur', validateFirstName);
+  document.querySelector('.lastname-validator').addEventListener('blur', validateLastName);
+
+  const firstNameRegex = /^[a-zA-Z]{2,50}$/
+  const lastNameRegex = /^[a-zA-Z]{2,50}([-'][a-zA-Z]{2,50})?$/
+  const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
+  const passwordRegex = /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[*.!@$%^&(){}[\]:;<>,.?\/~_+-=|\\]).{8,32}$/;
+
+  function validateFirstName(e) {
+    saveButtonObj.style.display = "block";
+    const firstname = document.querySelector('.firstname-validator');
+    if (firstname.disabled)
+      return true
+    if (firstNameRegex.test(firstname.value)) {
+      firstname.classList.remove('is-invalid');
+      firstname.classList.add('is-valid');
+      return true;
+    } else {
+      firstname.classList.remove('is-valid');
+      firstname.classList.add('is-invalid');
+      return false;
+    }
+  }
+
+  function validateLastName(e) {
+    saveButtonObj.style.display = "block";
+    const lastname = document.querySelector('.lastname-validator');
+    if (lastname.disabled)
+      return true
+    if (lastNameRegex.test(lastname.value)) {
+      lastname.classList.remove('is-invalid');
+      lastname.classList.add('is-valid');
+      return true;
+    } else {
+      lastname.classList.remove('is-valid');
+
+      lastname.classList.add('is-invalid');
+      return false;
+    }
+  }
+
+  function validateEmail(e) {
+    saveButtonObj.style.display = "block";
+    const email = document.querySelector('.email-validator');
+    if (email.disabled)
+      return true
+    if (emailRegex.test(email.value)) {
+      email.classList.remove('is-invalid');
+      email.classList.add('is-valid');
+
+      return true;
+    } else {
+      email.classList.add('is-invalid');
+      email.classList.remove('is-valid');
+
+      return false;
+    }
+  }
+
+  function validatePassword() {
+    saveButtonObj.style.display = "block";
+    const password = document.querySelector('.password-validator');
+    if (password.disabled)
+      return true
+    if (passwordRegex.test(password.value)) {
+      password.classList.remove('is-invalid');
+      password.classList.add('is-valid');
+
+      return true;
+    } else {
+      password.classList.add('is-invalid');
+      password.classList.remove('is-valid');
+
+      return false;
+    }
+  }
+  document.getElementById("edit-account-back-button").addEventListener("click", (event) => {
+    const inputElements = formElement.querySelectorAll('input');
+    inputElements.forEach((input) => {
+      if (input.type !== 'checkbox') {
+        input.disabled = true;
+      }
+    });
+    formElement.reset()
+  })
+  const inputFieldsTar = document.getElementsByClassName('admin-edit-input-disable-input');
+  document.addEventListener('click', function() {
+    for (let i = 0; i < inputFieldsTar.length; i++) {
+      if (inputFieldsTar[i].disabled) {
+        inputFieldsTar[i].classList.remove('is-invalid');
+      }
+    }
+  });
+  // ------------ Validation --------------------------------------------------
+  document.getElementsByClassName("deleteAccountExitBtn")[0].addEventListener('click', function() {
+    location.reload();
+  })
+  document.getElementsByClassName("deleteAccountExitBtn")[1].addEventListener('click', function() {
+    location.reload();
+  })
+</script>

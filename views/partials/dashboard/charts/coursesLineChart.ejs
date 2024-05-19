@@ -1,0 +1,29 @@
+<div class="col-6 col-md-12 col-xxl-6 d-flex order-2 order-xxl-6">
+  <div class="align-self-center w-100">
+    <div class="py-3">
+      <div class="chart chart-xs">
+        <div class="ag-format-container">
+          <div class="ag-courses_item">
+            <div href="#" class="ag-courses-item_container">
+              <div class="ag-courses-item_bg"></div>
+              <div class="ag-courses-item_text-box">
+                <span class="ag-courses-item_text">
+                  Number of courses in the past year
+                </span>
+              </div>
+              <div>
+                <canvas id="courses-line-chart-dashboard-months" aria-label="Number of new Courses Each Month" role="img"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+  const coursesCounts = <%- JSON.stringify(analytics.NoOfCoursesList) %>;
+</script>
+</script>
+<script src="js/dashboard/courseyearlinechart.js"></script>

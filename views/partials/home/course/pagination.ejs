@@ -1,0 +1,9 @@
+<div class="block-27">
+  <ul>
+    <li class="active"><a href="/courses?page=<%=currentPage- 1%>&search=<%=searchQuery%>">&lt;</a></li>
+  <% for (var i = 1; i< (size/16)+1; i++) { %>
+    <li><a href="/courses?page=<%=i%>&search=<%=searchQuery%>"><%= i %></a></li>
+  <% } %>
+  <li class="active"><a href="/courses?page=<%=currentPage + 1%>&search=<%=searchQuery%>">&gt;</a></li>
+  </ul>
+  </div>

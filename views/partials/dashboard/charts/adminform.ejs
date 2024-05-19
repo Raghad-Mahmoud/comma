@@ -1,0 +1,29 @@
+<% if (error) { %>
+    <div class="alert alert-danger" role="alert" id="signupadmin-error">
+      <%= error %>
+    </div>
+    <% } %>
+<form  action="/dashboard/admins/Newadmin" method="post" >
+    <div class="mb-3 ">
+        <label for="firstnameadmin">First name</label>
+        <input type="text" class="form-control" name= "firstNameAdmin" id = "firstname-admin">
+      </div>
+      <div class="mb-3 ">
+        <label for="lastnameadmin">Last name</label>
+        <input type="text" class="form-control" name="lastNameAdmin" id="lastnameadmin" >
+      </div>
+    <div class="mb-3 ">
+      <label for="adminemail">Email address</label>
+      <input type="email" class="form-control" id="admin-email" name="adminemail">
+      <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+    </div>
+    <div class="mb-3">
+      <label for="adminPassword1">Password</label>
+      <input type="password" class="form-control" id="admin-Password1" name="adminPassword1">
+    </div>
+    <div class="mb-3">
+        <label for="confirmadminPassword">Confirm Password</label>
+        <input type="password" class="form-control " id="confirm-adminPassword" name="confirmadminPassword"  />
+      </div>
+    <button type="submit" class="btn btn-primary mb-5">Submit</button>
+  </form>

@@ -1,0 +1,21 @@
+<%- include('../../partials/dashboard/header'); %>
+<div class="wrapper">
+  <%- include('../../partials/dashboard/sidebar'); %>
+  <div class="main">
+    <%- include('../../partials/dashboard/navbar'); %>
+    <main class="content">
+      <%- include('../../partials/dashboard/charts/admin_accounts_edit'); %>
+      <%- include('../../partials/dashboard/charts/add_admins_button'); %>
+      <div class="row">
+        <%- include('../../partials/dashboard/charts/all_admins_table'); %>
+      </div>
+    </main>
+    <%- include('../../partials/dashboard/footer'); %>
+  </div>
+</div>
+
+<script src="/js/app.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,42 @@
+<nav class="navbar-fixed-top">
+  <div class="container-fluid navbar">
+    <div class="navbar-section" id="comma">
+      <a href="/courses"><img src="/images/comma-logo.png" class="commaLogoNav" ></a>
+    </div>
+    <!--Search bar -->
+    <% if (courses===true) { %>
+    <div class="search-box navbar-section">
+      <form action="/search" method="POST">
+        <button class="btn-search"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="black" class="bi bi-search" viewBox="0 0 16 16">
+            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+          </svg></i></button>
+        <input type="text" name="searchText" class="input-search" placeholder="Type to Search...">
+      </form>
+      <script>
+        let noResults = false;
+      </script>
+    </div>
+    <% } %>
+    <% if (isLoggedIn===null) { %>
+    <div class="navbar-section" id="login">
+      <a class="btn btn-outline-dark btn-hire-me" href="/login">Log in</a>
+      <% } else { %>
+      <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <i class="fa-solid fa-user"></i>
+        </button>
+
+        <ul class="dropdown-menu dropdown-menu-end">
+          <li><a class="dropdown-item" href="/profile">profile</a></li>
+          <form action="/logout" method="post">
+            <button type="submit" class="dropdown-item">Logout</button>
+          </form>
+        </ul>
+      </div>
+
+
+      <% } %>
+    </div>
+  </div>
+
+</nav>
